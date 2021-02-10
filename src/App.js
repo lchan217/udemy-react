@@ -34,11 +34,23 @@ class App extends Component {
   }
 
   render() {
+    // not global, scoping
+    const style = {
+      backgroundColor: 'white',
+      // also valid: 'background-color': 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    };
+
     return (
       <div className="App">
         <h1>Hi there!</h1>
         <p>Everything must be included in App div</p>
-        <button onClick={() => this.switchNameHandler('Marie')}>Switch Name</button>
+        <button 
+          style={style} 
+          onClick={() => this.switchNameHandler('Marie')}>Switch Name</button>
         <Person 
           name={this.state.persons[0].name} 
           age={this.state.persons[0].age}/>
