@@ -4,7 +4,6 @@ import classes from './App.css';
 // import Radium, { StyleRoot }from 'radium';
 // import styled from 'styled-components'
 import Person from './Person/Person';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 
 // const StyledButton = styled.button`
 //   background-color: ${props => props.alt ? '#FA8072' : '#CFDBC5'};
@@ -101,12 +100,13 @@ class App extends Component {
       persons = (
         <div>
           {this.state.persons.map((person, index) => {
-            return <ErrorBoundary key={person.id}><Person
+            return <Person
+              key={person.id}
               name={person.name} 
               age={person.age}
               click={() => this.deletePersonHandler(index)}
               changed={(event) => this.nameChangedHandler(event, person.id)}
-              /></ErrorBoundary>
+              />
           })}
         </div>
       );
