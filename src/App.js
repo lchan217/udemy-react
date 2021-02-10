@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import React, { useState } from 'react'
-import './App.css';
+import classes from './App.css';
 // import Radium, { StyleRoot }from 'radium';
 // import styled from 'styled-components'
 import Person from './Person/Person';
@@ -94,6 +94,7 @@ class App extends Component {
 
     // recommended way (vs ternary in return)
     let persons = null;
+    let btnClass = classes
 
     if(this.state.showPersons){
       persons = (
@@ -110,6 +111,8 @@ class App extends Component {
         </div>
       );
 
+      btnClass = classes.Red
+
       // style.backgroundColor = '#FA8072'
       // style[':hover'] = {
       //   backgroundColor: 'yellow',
@@ -119,21 +122,21 @@ class App extends Component {
 
     }
 
-    const classes = []
+    const assignedClasses = []
 
     if(this.state.persons.length <= 2){
-      classes.push('red')
+      assignedClasses.push(classes.red)
     }
 
     if(this.state.persons.length <= 1){
-      classes.push('bold')
+      assignedClasses.push(classes.bold)
     }
 
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi there!</h1>
-        <p className={classes.join(' ')}>It's really working!</p>
-        <button class="button"
+        <p className={assignedClasses.join(' ')}>It's really working!</p>
+        <button className={btnClass}
           alt={this.state.showPersons}
           onClick={this.togglePersonsHandler}>Switch Name</button>
         {persons}
