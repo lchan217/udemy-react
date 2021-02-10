@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
 // import React, { useState } from 'react'
 import './App.css';
-import Person from './Person/Person'
+// import Radium, { StyleRoot }from 'radium';
+// import styled from 'styled-components'
+import Person from './Person/Person';
 
+// const StyledButton = styled.button`
+//   background-color: ${props => props.alt ? '#FA8072' : '#CFDBC5'};
+//   font: inherit;
+//   border: 1px solid #000000;
+//   border-radius: 8px;
+//   padding: 8px;
+//   cursor: pointer;
+
+//   &:hover {
+//     background-color: ${props => props.alt ? 'orange' : '#ccc'};
+//     color: gray;
+//   }
+// `
 class App extends Component {
   state = {
     persons: [
@@ -62,14 +77,20 @@ class App extends Component {
 
   render() {
     // not global, scoping
-    const style = {
-      backgroundColor: 'white',
-      // also valid: 'background-color': 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    };
+    // const style = {
+    //   backgroundColor: '#CFDBC5',
+    //   // also valid: 'background-color': 'white',
+    //   font: 'inherit',
+    //   border: '1px solid #000000',
+    //   borderRadius: '8px',
+    //   padding: '8px',
+    //   cursor: 'pointer',
+    //   // from radium
+    //   // ':hover': {
+    //   //   backgroundColor: 'yellow',
+    //   //   color: 'pink'
+    //   // }
+    // };
 
     // recommended way (vs ternary in return)
     let persons = null;
@@ -88,14 +109,32 @@ class App extends Component {
           })}
         </div>
       );
+
+      // style.backgroundColor = '#FA8072'
+      // style[':hover'] = {
+      //   backgroundColor: 'yellow',
+      //   color: 'pink'
+      // }
+
+
+    }
+
+    const classes = []
+
+    if(this.state.persons.length <= 2){
+      classes.push('red')
+    }
+
+    if(this.state.persons.length <= 1){
+      classes.push('bold')
     }
 
     return (
       <div className="App">
         <h1>Hi there!</h1>
-        <p>Everything must be included in App div</p>
-        <button 
-          style={style} 
+        <p className={classes.join(' ')}>It's really working!</p>
+        <button class="button"
+          alt={this.state.showPersons}
           onClick={this.togglePersonsHandler}>Switch Name</button>
         {persons}
       </div>
