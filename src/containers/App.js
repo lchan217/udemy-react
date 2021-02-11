@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import classes from './App.css';
 // import Radium, { StyleRoot }from 'radium';
 // import styled from 'styled-components'
-import Person from '../components/Persons/Person/Person';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Persons/Cockpit/Cockpit';
 
 // const StyledButton = styled.button`
 //   background-color: ${props => props.alt ? '#FA8072' : '#CFDBC5'};
@@ -94,51 +95,24 @@ class App extends Component {
 
     // recommended way (vs ternary in return)
     let persons = null;
-    let btnClass = classes
 
     if(this.state.showPersons){
       persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
-            return <Person
-              key={person.id}
-              name={person.name} 
-              age={person.age}
-              click={() => this.deletePersonHandler(index)}
-              changed={(event) => this.nameChangedHandler(event, person.id)}
-              />
-          })}
-        </div>
-      );
-
-      btnClass = classes.Red
-
-      // style.backgroundColor = '#FA8072'
-      // style[':hover'] = {
-      //   backgroundColor: 'yellow',
-      //   color: 'pink'
-      // }
-
-
+          <Persons
+            persons={this.state.persons}
+            changed={this.nameChangedHandler}
+            clicked={this.deletePersonHandler} />
+      )
     }
 
-    const assignedClasses = []
-
-    if(this.state.persons.length <= 2){
-      assignedClasses.push(classes.red)
-    }
-
-    if(this.state.persons.length <= 1){
-      assignedClasses.push(classes.bold)
-    }
+   
 
     return (
       <div className={classes.App}>
-        <h1>Hi there!</h1>
-        <p className={assignedClasses.join(' ')}>It's really working!</p>
-        <button className={btnClass}
-          alt={this.state.showPersons}
-          onClick={this.togglePersonsHandler}>Switch Name</button>
+        <Cockpit 
+          persons={this.state.persons} 
+          showPersons={this.state.showPersons}
+          clicked={this.togglePersonsHandler}/>
         {persons}
       </div>
   
