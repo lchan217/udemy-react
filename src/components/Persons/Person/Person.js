@@ -3,7 +3,7 @@ import React from 'react'
 // import Radium from 'radium'
 // import styled from 'styled-components'
 import classes from './Person.css'
-import Aux from '../../../highOrderedComponents/Aux'
+import Aux from '../../../higherOrderComponents/Aux'
 
 const person = (props) => {
     // for radium

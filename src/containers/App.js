@@ -5,6 +5,8 @@ import classes from './App.css';
 // import styled from 'styled-components'
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Persons/Cockpit/Cockpit';
+import withClass from '../higherOrderComponents/withClass'
+import Aux from '../higherOrderComponents/Aux'
 
 // const StyledButton = styled.button`
 //   background-color: ${props => props.alt ? '#FA8072' : '#CFDBC5'};
@@ -108,20 +110,22 @@ class App extends Component {
    
 
     return (
-      <div className={classes.App}>
+      // <WithClass classes={classes.App}>
+      <Aux>
         <Cockpit 
           persons={this.state.persons} 
           showPersons={this.state.showPersons}
           clicked={this.togglePersonsHandler}/>
         {persons}
-      </div>
+      </Aux>
+      // </WithClass>
   
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'does this work?'))
   }
 }
 
-export default App;
+export default withClass(App, classes.App);
 
 // const app = props => {
 //   const [personState, setPersonsState] = useState({
