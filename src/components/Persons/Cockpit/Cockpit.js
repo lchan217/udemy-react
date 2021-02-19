@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useEffect }from 'react';
 import classes from './Cockpit.css'
 
 const cockpit = (props) => {
+  useEffect(() => {
+    // executes for every render unless you say in second arg...
+    // now only runs when props.person changes
+    // http request
+  }, [props.persons]);
+  
+
     const assignedClasses = []
     let btnClass = ''
 

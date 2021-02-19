@@ -3,6 +3,7 @@ import React from 'react'
 // import Radium from 'radium'
 // import styled from 'styled-components'
 import classes from './Person.css'
+import Aux from '../../../highOrderedComponents/Aux'
 
 const person = (props) => {
     // for radium
@@ -25,13 +26,23 @@ const person = (props) => {
     //             width: 450px;
     //         }`
 
+    //now an array, do not need wrapping div
     return (
-        <div className={classes.Person} style={style}>
-            <p onClick={props.click}>My name is {props.name} and my age is {props.age}</p>
-            <p>{props.children}</p>
-            <input type="text" onChange={props.changed} value={props.name}/>
-        </div>
+      <Aux>
+        <p onClick={props.click}>My name is {props.name} and my age is {props.age}</p>
+        <p>{props.children}</p>
+        <input type="text" onChange={props.changed} value={props.name}/>
+      </Aux>
     )
 }
+
+ //now an array, do not need wrapping div
+//  return [
+   
+//   <p key="1" onClick={props.click}>My name is {props.name} and my age is {props.age}</p>,
+//   <p key="2">{props.children}</p>,
+//   <input key="3" type="text" onChange={props.changed} value={props.name}/>
+
+// ]
 
 export default person;
