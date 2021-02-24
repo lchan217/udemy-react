@@ -7,6 +7,7 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Persons/Cockpit/Cockpit';
 import withClass from '../higherOrderComponents/withClass'
 import Aux from '../higherOrderComponents/Aux'
+import AuthContext from '../components/Persons/context/auth-context'
 
 // const StyledButton = styled.button`
 //   background-color: ${props => props.alt ? '#FA8072' : '#CFDBC5'};
@@ -30,7 +31,8 @@ class App extends Component {
     ],
     otherState: 'some other value',
     showPersons: false,
-    changeCounter: 0
+    changeCounter: 0,
+    authenticated: false
   }
 
   switchNameHandler = (newName) => {
@@ -87,6 +89,10 @@ class App extends Component {
 
   }
 
+  loginHandler = () => {
+    this.setState({ authenticated: true })
+  }
+
   render() {
     // not global, scoping
     // const style = {
@@ -112,7 +118,8 @@ class App extends Component {
           <Persons
             persons={this.state.persons}
             changed={this.nameChangedHandler}
-            clicked={this.deletePersonHandler} />
+            clicked={this.deletePersonHandler}
+            isAuthenticated={this.state.authenticated} />
       )
     }
 
@@ -121,11 +128,19 @@ class App extends Component {
     return (
       // <WithClass classes={classes.App}>
       <Aux>
-        <Cockpit 
-          persons={this.state.persons} 
-          showPersons={this.state.showPersons}
-          clicked={this.togglePersonsHandler}/>
-        {persons}
+        <AuthContext.Provider 
+          value={{
+            authenticated: this.state.authenticated,
+            login: this.loginHandler
+          }}
+        >
+          <Cockpit 
+            persons={this.state.persons} 
+            showPersons={this.state.showPersons}
+            clicked={this.togglePersonsHandler}
+            login={this.loginHandler}/>
+          {persons}
+        </AuthContext.Provider>
       </Aux>
       // </WithClass>
   

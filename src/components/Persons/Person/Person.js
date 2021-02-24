@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import classes from './Person.css'
 import Aux from '../../../higherOrderComponents/Aux'
 import withClass from '../../../higherOrderComponents/withClass'
+import AuthContext from '../context/auth-context'
 
 class Person extends Component {
     // for radium
@@ -34,19 +35,28 @@ class Person extends Component {
       this.inputElementRef = React.createRef();
     }
 
+    static contextType = AuthContext;
+
     componentDidMount(){
       this.inputElementRef.current.focus();
+      console.log(this.context.authenticated)
     }
+
     render(){
       return (
         <Aux>
+          <AuthContext.Consumer>
+            {(context) => 
+              context.authenticated ? <p>Authenticated!</p> : <p>Please log in</p>}
+          </AuthContext.Consumer>
           <p onClick={this.props.click}>My name is {this.props.name} and my age is {this.props.age}</p>
           <p>{this.props.children}</p>
           <input 
             type="text" 
             onChange={this.props.changed} 
             value={this.props.name}
-            ref={this.inputElementRef}/>
+            ref={this.inputElementRef}
+            />
         </Aux>
       )
     }
