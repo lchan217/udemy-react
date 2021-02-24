@@ -45,10 +45,8 @@ class Person extends Component {
     render(){
       return (
         <Aux>
-          <AuthContext.Consumer>
-            {(context) => 
-              context.authenticated ? <p>Authenticated!</p> : <p>Please log in</p>}
-          </AuthContext.Consumer>
+            {/* see static method above */}
+            {this.context.authenticated ? <p>Authenticated!</p> : <p>Please log in</p>}
           <p onClick={this.props.click}>My name is {this.props.name} and my age is {this.props.age}</p>
           <p>{this.props.children}</p>
           <input 

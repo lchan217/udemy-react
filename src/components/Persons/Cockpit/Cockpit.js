@@ -1,4 +1,4 @@
-import React, { useEffect, useRef }from 'react';
+import React, { useEffect, useRef, useContext }from 'react';
 import classes from './Cockpit.css'
 import AuthContext from '../context/auth-context'
 
@@ -8,6 +8,8 @@ const cockpit = (props) => {
   // refs for functional
   const toggleBtnRef = useRef(null)
   // toggleBtnRef.current.click() - can't call it here bc it's not defined yet, do it in useEffect
+
+  const authContext = useContext(AuthContext);
 
   useEffect(() => {
     // executes for every render unless you say in second arg...
@@ -40,9 +42,7 @@ const cockpit = (props) => {
             className={btnClass}
             alt={props.showPersons}
             onClick={props.clicked}>Switch Name</button>
-            <AuthContext.Consumer>
-              {(context) => <button onClick={context.login}>Log In</button>}
-            </AuthContext.Consumer>
+              {<button onClick={authContext.login}>Log In</button>}
         </div>
     );
 };
