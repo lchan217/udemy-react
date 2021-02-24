@@ -29,12 +29,24 @@ class Person extends Component {
     //         }`
 
     //now an array, do not need wrapping div
+    constructor(props){
+      super(props)
+      this.inputElementRef = React.createRef();
+    }
+
+    componentDidMount(){
+      this.inputElementRef.current.focus();
+    }
     render(){
       return (
         <Aux>
           <p onClick={this.props.click}>My name is {this.props.name} and my age is {this.props.age}</p>
           <p>{this.props.children}</p>
-          <input type="text" onChange={this.props.changed} value={this.props.name}/>
+          <input 
+            type="text" 
+            onChange={this.props.changed} 
+            value={this.props.name}
+            ref={this.inputElementRef}/>
         </Aux>
       )
     }
