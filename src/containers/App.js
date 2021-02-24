@@ -29,7 +29,8 @@ class App extends Component {
       { id: 'aw1', name: "Claire", age: 32 }
     ],
     otherState: 'some other value',
-    showPersons: false
+    showPersons: false,
+    changeCounter: 0
   }
 
   switchNameHandler = (newName) => {
@@ -74,7 +75,15 @@ class App extends Component {
     persons.splice(personIndex, 1)
 
     // set state with deleted person
-    this.setState({persons: persons})
+    this.setState((prevState, props) => {
+      return {
+        persons: persons,
+        changeCounter: prevState.changeCounter + 1
+
+        // don't use this.state.changeCounter since previous state
+        // might not be accurate
+      }
+    })
 
   }
 

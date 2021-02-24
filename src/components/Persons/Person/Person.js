@@ -1,17 +1,19 @@
-import React from 'react'
+import React,{ Component } from 'react'
+import PropTypes from 'prop-types'
 // import './Person.css'
 // import Radium from 'radium'
 // import styled from 'styled-components'
 import classes from './Person.css'
 import Aux from '../../../higherOrderComponents/Aux'
+import withClass from '../../../higherOrderComponents/withClass'
 
-const person = (props) => {
+class Person extends Component {
     // for radium
-    const style = {
-        '@media (min-width: 500px)': {
-            width: '450px'
-        }
-    };
+    // const style = {
+    //     '@media (min-width: 500px)': {
+    //         width: '450px'
+    //     }
+    // };
 
     // for styled components
     // const StyledDiv = styled.div`
@@ -27,14 +29,26 @@ const person = (props) => {
     //         }`
 
     //now an array, do not need wrapping div
-    return (
-      <Aux>
-        <p onClick={props.click}>My name is {props.name} and my age is {props.age}</p>
-        <p>{props.children}</p>
-        <input type="text" onChange={props.changed} value={props.name}/>
-      </Aux>
-    )
+    render(){
+      return (
+        <Aux>
+          <p onClick={this.props.click}>My name is {this.props.name} and my age is {this.props.age}</p>
+          <p>{this.props.children}</p>
+          <input type="text" onChange={this.props.changed} value={this.props.name}/>
+        </Aux>
+      )
+    }
 }
+
+// data type - good for bigger teams
+Person.propTypes = {
+  click: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  changed: PropTypes.func
+};
+
+export default withClass(Person, classes.Person);
 
  //now an array, do not need wrapping div
 //  return [
@@ -45,4 +59,3 @@ const person = (props) => {
 
 // ]
 
-export default person;
